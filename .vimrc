@@ -2,16 +2,17 @@
 
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
 Plug 'pangloss/vim-javascript'
-Plug 'wincent/command-t'
+Plug 'junegunn/fzf'
 Plug 'scrooloose/nerdcommenter'
 Plug 'janko-m/vim-test'
 Plug 'benmills/vimux'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'crusoexia/vim-monokai'
 Plug 'Raimondi/delimitMate'
+Plug 'crusoexia/vim-monokai'
+Plug 'nanotech/jellybeans.vim'
+Plug 'ajh17/Spacegray.vim'
 call plug#end()
 
 " ========= Options ==========
@@ -33,34 +34,35 @@ set smartcase
 set wildignore+=*.pyc,*.o,*.class,*.lo,.git,node_modules/**,out/**
 set tags +=gems.tags
 set mouse=
+set visualbell
+set term=screen-256color
+set t_ut=
 
 " ========== Colors ==========
 
 colorscheme monokai
-let g:airline_theme = 'simple'
 
 " ========== Plugin Options ==========
-
-let g:CommandTMaxHeight = 15
-let g:CommandTMatchWindowAtTop = 1
-let g:CommandTCancelMap = ['<ESC>', '<C-c>']
-let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<ESC>OB']
-let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
 
 let g:VimuxUseNearestPane = 1
 
 let g:delimitMate_expand_cr = 1
 
+let g:NERDCreateDefaultMappings = 0
+
 let test#strategy = "vimux"
 
 " ========== Shortcuts ==========
 
-" CommandT
-map <silent> <LocalLeader>ff :CommandT<CR>
-map <silent> <LocalLeader>fr :CommandTFlush<CR>
-
+" Vimux
 nmap <silent> <leader>rf :TestNearest<CR>
 nmap <silent> <leader>rb :TestFile<CR>
 nmap <silent> <leader>ra :TestSuite<CR>
 nmap <silent> <leader>rl :TestLast<CR>
 nmap <silent> <leader>rv :TestVisit<CR>
+
+" NerdCommenter
+nmap <leader>cc <plug>NERDCommenterToggle
+
+" FZF
+nmap <leader>ff :FZF<CR>
