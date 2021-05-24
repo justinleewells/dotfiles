@@ -3,16 +3,15 @@
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 Plug 'junegunn/fzf'
-Plug 'scrooloose/nerdcommenter'
 Plug 'janko-m/vim-test'
 Plug 'benmills/vimux'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'Raimondi/delimitMate'
 Plug 'crusoexia/vim-monokai'
-Plug 'nanotech/jellybeans.vim'
-Plug 'ajh17/Spacegray.vim'
 call plug#end()
 
 " ========= Options ==========
@@ -37,6 +36,7 @@ set mouse=
 set visualbell
 set term=screen-256color
 set t_ut=
+set backupcopy=yes
 
 " ========== Colors ==========
 
@@ -52,6 +52,8 @@ let g:NERDCreateDefaultMappings = 0
 
 let test#strategy = "vimux"
 
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+
 " ========== Shortcuts ==========
 
 " Vimux
@@ -60,9 +62,11 @@ nmap <silent> <leader>rb :TestFile<CR>
 nmap <silent> <leader>ra :TestSuite<CR>
 nmap <silent> <leader>rl :TestLast<CR>
 nmap <silent> <leader>rv :TestVisit<CR>
-
-" NerdCommenter
-nmap <leader>cc <plug>NERDCommenterToggle
+map <Leader>vp :VimuxPromptCommand<CR>
+map <Leader>vl :VimuxRunLastCommand<CR>
 
 " FZF
 nmap <leader>ff :FZF<CR>
+
+" Java
+map <silent> <Leader>jc :call VimuxRunCommand("javac " . bufname("%") . " && java " . expand("%:r") . " && rm " . expand("%:r") . ".class")<CR>
